@@ -378,7 +378,7 @@ func (r *Raft) restore() error {
 // the first time and there is no existing configuration. This should
 // only be called on a single, voting member of the cluster.
 func (r *Raft) Bootstrap(configuration map[string]string) error {
-	if address, ok := configuration[r.id]; !ok || r.address != address {
+	if _, ok := configuration[r.id]; !ok {
 		return errors.New("configuration must contain this node")
 	}
 	if r.configuration != nil {
